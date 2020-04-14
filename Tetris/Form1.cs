@@ -53,19 +53,19 @@ namespace Tetris
             x = (x * 30) + (Size.Width / 2 - 150);
             y = ((19 - y) * 30) + 100;
 
-            if (Color == 'r')
+            if (Color == 'r' || Color == 'R')
                 l.DrawImage(red, x, y);
-            if (Color == 'b')
+            if (Color == 'b' || Color == 'B')
                 l.DrawImage(blue, x, y);
-            if (Color == 'y')
+            if (Color == 'y' || Color == '>')
                 l.DrawImage(yellow, x, y);
-            if (Color == 'g')
+            if (Color == 'g' || Color == 'G')
                 l.DrawImage(green, x, y);
-            if (Color == 'o')
+            if (Color == 'o' || Color == 'O')
                 l.DrawImage(orange, x, y);
-            if (Color == 'p')
+            if (Color == 'p' || Color == 'P')
                 l.DrawImage(purple, x, y);
-            if (Color == 'l')
+            if (Color == 'l' || Color == 'L')
                 l.DrawImage(lightblue, x, y);
         }
 
