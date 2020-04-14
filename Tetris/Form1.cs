@@ -57,7 +57,7 @@ namespace Tetris
                 l.DrawImage(red, x, y);
             if (Color == 'b' || Color == 'B')
                 l.DrawImage(blue, x, y);
-            if (Color == 'y' || Color == '>')
+            if (Color == 'y' || Color == 'Y')
                 l.DrawImage(yellow, x, y);
             if (Color == 'g' || Color == 'G')
                 l.DrawImage(green, x, y);
