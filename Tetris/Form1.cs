@@ -80,6 +80,7 @@ namespace Tetris
             game.start_timer();
         }
 
+        //Toggle Fullscreen F11
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F11)
@@ -94,8 +95,14 @@ namespace Tetris
                     FormBorderStyle = FormBorderStyle.FixedSingle;
                     WindowState = FormWindowState.Normal;
                 }
-
             }
+            if (e.KeyCode == Keys.Escape)
+            {
+                FormBorderStyle = FormBorderStyle.FixedSingle;
+                WindowState = FormWindowState.Normal;
+            }
+
+
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
