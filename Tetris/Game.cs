@@ -13,7 +13,7 @@ namespace Tetris
     public class Game
     {
         private int tickCount = 0;
-        private const int FPS = 30;
+        private const int FPS = 60;
         private Board board = new Board();
         private Timer Game_Timer = new Timer();
         private Pieces currentPiece;
@@ -79,6 +79,7 @@ namespace Tetris
         {
             currentPiece = null;
             stop_timer();
+            drawing.playSound("gameover");
             MessageBox.Show("You are fucking bad at TETRIS");
         }
         //handles gravity, setting blocks as final, Tetris check and removing the current piece
@@ -161,12 +162,16 @@ namespace Tetris
                 for (int x = 0; x < 10; x++)
                     if (board[Tuple.Create(x,y)] == '.') { filled = false; }
                 if (filled)
-                {
+                {                    
                     delete_line(y);
                     deleted++;
                 }
             }
-            if (deleted > 0) { Console.WriteLine("you removed {0} Lines", deleted); }
+            if (deleted > 0) 
+            {
+                drawing.playSound("deleteLine");
+                Console.WriteLine("you removed {0} Lines", deleted); 
+            }
         }
         private void Game_Tick(Object myObject, EventArgs myEventArgs)
         {
@@ -198,7 +203,7 @@ namespace Tetris
             tickCount++;
             if (currentPiece == null) { drawing.Invalidate(); return; }
             //only apply natural gravity every x ticks
-            if (tickCount >= 10)
+            if (tickCount >= 18)
             {
                 gravity();
                 tickCount = 0;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Media;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,11 @@ namespace Tetris
 
         char lastInput = '.';
 
+        SoundPlayer Music = new SoundPlayer();
+        SoundPlayer Sounds = new SoundPlayer();
+
+
+
         public Form1()
         {
             InitializeComponent();
@@ -46,6 +52,12 @@ namespace Tetris
 
             //Return last Input
             return tempInput;
+        }
+
+        //plays Sounds
+        public void playSound(string Sound)
+        {
+            //TODO: multiple WAV audio
         }
 
         //draws full Board

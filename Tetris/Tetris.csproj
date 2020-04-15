@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="blue.png" />
+    <Content Include="gameover.wav" />
     <Content Include="Glow\blue %281%29.png" />
     <Content Include="Glow\blue %2810%29.png" />
     <Content Include="Glow\blue %2811%29.png" />
@@ -249,7 +250,9 @@
     <Content Include="Glow\yellow %289%29.png" />
     <Content Include="green.png" />
     <Content Include="lightblue.png" />
+    <Content Include="line.wav" />
     <Content Include="Logo.ico" />
+    <Content Include="main_theme.wav" />
     <Content Include="orange.png" />
     <Content Include="purple.png" />
     <Content Include="red.png" />
