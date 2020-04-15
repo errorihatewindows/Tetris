@@ -143,7 +143,7 @@ namespace Tetris
                 Picture = new Bitmap("Glow\\" + color + " (" + i.ToString() + ").png");
                 glow.DrawImage(Picture, x, y);
                 Invalidate(new Rectangle(0, 0, 300, 300));
-                wait(75);
+                util.wait(75);
             }         
         }
 
@@ -193,24 +193,18 @@ namespace Tetris
             Draw_Board(e.Graphics);
         }
 
-        //Wartet gewisse anzahl millisekunden
-        public void wait(int milliseconds)
+        //Users Last Input
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Timer timer1 = new Timer();
-            if (milliseconds == 0 || milliseconds < 0) return;
-            timer1.Interval = milliseconds;
-            timer1.Enabled = true;
-            timer1.Start();
-            timer1.Tick += (s, e) =>
-            {
-                timer1.Enabled = false;
-                timer1.Stop();
-            };
-            while (timer1.Enabled)
-            {
-                Application.DoEvents();
-            }
-
+            //Store Users last Input
+            if (e.KeyChar == (char)Keys.Up)
+                lastInput = 'U';
+            if (e.KeyChar == (char)Keys.Down)
+                lastInput = 'D';
+            if (e.KeyChar == (char)Keys.Right)
+                lastInput = 'R';
+            if (e.KeyChar == (char)Keys.Left)
+                lastInput = 'L';
         }
     }
 }
