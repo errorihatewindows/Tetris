@@ -102,6 +102,9 @@ namespace Tetris
         }
         private void Game_Tick(Object myObject, EventArgs myEventArgs)
         {
+
+            Console.WriteLine(drawing.get_Input());
+
             //piece got killed last tick
             if (currentPiece == null)
             {

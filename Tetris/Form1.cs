@@ -155,6 +155,16 @@ namespace Tetris
         //Toggle Fullscreen F11
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            //Store Users last Input
+            if (e.KeyCode == Keys.Up)
+                lastInput = 'U';
+            if (e.KeyCode == Keys.Down)
+                lastInput = 'D';
+            if (e.KeyCode == Keys.Right)
+                lastInput = 'R';
+            if (e.KeyCode == Keys.Left)
+                lastInput = 'L';
+
             //Toggle Fullscreen
             if (e.KeyCode == Keys.F11)
             {
@@ -181,20 +191,6 @@ namespace Tetris
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Draw_Board(e.Graphics);
-        }
-
-        //Users Last Input
-        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //Store Users last Input
-            if (e.KeyChar == (char)Keys.Up)
-                lastInput = 'U';
-            if (e.KeyChar == (char)Keys.Down)
-                lastInput = 'D';
-            if (e.KeyChar == (char)Keys.Right)
-                lastInput = 'R';
-            if (e.KeyChar == (char)Keys.Left)
-                lastInput = 'L';
         }
 
         //Wartet gewisse anzahl millisekunden
