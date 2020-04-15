@@ -70,6 +70,7 @@ namespace Tetris
         {
             blocks['l'] = IBlock;
             blocks['y'] = OBlock;
+            blocks['p'] = TBlock;
             //TODO add other 5 blocks
         }
         private Piece[] IBlock() 
@@ -101,8 +102,26 @@ namespace Tetris
         private Piece[] SBlock()
         private Piece[] ZBlock()
         private Piece[] LBlock()
-        private Piece[] JBlock()
-        private Piece[] TBlock()*/
+        private Piece[] JBlock() */
+        private Piece[] TBlock()
+        {
+            Piece[] output = new Piece[4];
+            Piece[] relative = new Piece[4];
+            relative[0] = Tuple.Create(0, -1);
+            relative[1] = Tuple.Create(-1, 0);
+            relative[2] = Tuple.Create(0, 1);
+            relative[3] = Tuple.Create(1, 0);
+            output[0] = position;
+            int j = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                if (i == rotation) { continue; }
+                j++;
+                output[j] = Tuple.Create(position.Item1 + relative[i].Item1,position.Item2 + relative[i].Item2);
+
+            }
+            return output;
+        }
     }
 
 }

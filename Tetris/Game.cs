@@ -28,7 +28,7 @@ namespace Tetris
             Game_Timer.Tick += new EventHandler(Game_Tick);
             Generate_Board();
 
-            currentPiece = new Pieces('y');
+            currentPiece = new Pieces('p');
 
         }
         //-----------------
