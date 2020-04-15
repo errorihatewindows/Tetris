@@ -23,6 +23,8 @@ namespace Tetris
         Bitmap orange = new Bitmap(@"orange.png");
         Bitmap green = new Bitmap(@"green.png");
 
+        Bitmap Interface = new Bitmap(@"UI.png");
+
         public Form1()
         {
             InitializeComponent();
@@ -53,19 +55,19 @@ namespace Tetris
             x = (x * 30) + (Size.Width / 2 - 150);
             y = ((19 - y) * 30) + 100;
 
-            if (Color == 'r')
+            if (Color == 'r' || Color == 'R')
                 l.DrawImage(red, x, y);
-            if (Color == 'b')
+            if (Color == 'b' || Color == 'B')
                 l.DrawImage(blue, x, y);
-            if (Color == 'y')
+            if (Color == 'y' || Color == 'Y')
                 l.DrawImage(yellow, x, y);
-            if (Color == 'g')
+            if (Color == 'g' || Color == 'G')
                 l.DrawImage(green, x, y);
-            if (Color == 'o')
+            if (Color == 'o' || Color == 'O')
                 l.DrawImage(orange, x, y);
-            if (Color == 'p')
+            if (Color == 'p' || Color == 'P')
                 l.DrawImage(purple, x, y);
-            if (Color == 'l')
+            if (Color == 'l' || Color == 'L')
                 l.DrawImage(lightblue, x, y);
         }
 
@@ -73,6 +75,7 @@ namespace Tetris
         private void Draw_Background(Graphics l)
         {
             l.FillRectangle(Brushes.Gray, (Size.Width / 2 - 150), 100, 300, 600);
+            l.DrawImage(Interface, (Size.Width / 2 - (150 + 191)), (100 - 17));
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -80,6 +83,7 @@ namespace Tetris
             game.start_timer();
         }
 
+        //Toggle Fullscreen F11
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F11)
@@ -94,8 +98,14 @@ namespace Tetris
                     FormBorderStyle = FormBorderStyle.FixedSingle;
                     WindowState = FormWindowState.Normal;
                 }
-
             }
+            if (e.KeyCode == Keys.Escape)
+            {
+                FormBorderStyle = FormBorderStyle.FixedSingle;
+                WindowState = FormWindowState.Normal;
+            }
+
+
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
