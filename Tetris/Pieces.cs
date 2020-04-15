@@ -24,8 +24,8 @@ namespace Tetris
         {
             color = Color;
             rotation = 0;
-            if (color == 'l') { position = Tuple.Create(5, 19); }
-            else { position = Tuple.Create(4, 18); }
+            if (color == 'l') { position = Tuple.Create(5, 22); }
+            else { position = Tuple.Create(4, 21); }
             init_dicts();
 
         }

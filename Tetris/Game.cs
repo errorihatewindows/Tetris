@@ -13,7 +13,7 @@ namespace Tetris
     public class Game
     {
         private int tickCount = 0;
-        private const int FPS = 20;
+        private const int FPS = 40;
         private Board board = new Board();
         private Timer Game_Timer = new Timer();
         private Pieces currentPiece;
@@ -67,6 +67,12 @@ namespace Tetris
                 }
             }
         }
+        private void loose()
+        {
+            currentPiece = null;
+            stop_timer();
+            MessageBox.Show("あなたは失う");
+        }
         //handles gravity, setting blocks as final, Tetris check and removing the current piece
         private void gravity()
         {
@@ -79,13 +85,18 @@ namespace Tetris
                 //floor collision
                 if (check.Item2 < 0) { Kill = true; break; }
                 //collision with another piece
+                if (check.Item2 > 19) { continue; }
                 if (board[check] != '.') { Kill = true; break; }
             }
             //kills the piece, applying its last valid coordinates as stable blocks
             if (Kill)
             {
                 //set blocks as final
-                foreach (Piece block in old) { board[block] = currentPiece.getColor(); }
+                foreach (Piece block in old)
+                {
+                    if (block.Item2 > 19) { loose(); return; }
+                    board[block] = currentPiece.getColor();
+                }
                 currentPiece = null;
             }
         }
