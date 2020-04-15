@@ -111,9 +111,9 @@ namespace Tetris
                 color = "lightblue";
 
             Bitmap Picture;
-            for (int i = 0; i < 20; i++)
+            for (int i = 1; i < 21; i++)
             {
-                Picture = new Bitmap("Glow\\" + color + "_glow\\" + i.ToString() + ".png");
+                Picture = new Bitmap("Glow\\" + color + " (" + i.ToString() + ").png");
                 glow.DrawImage(Picture, x, y);
                 wait(100);
             }         
