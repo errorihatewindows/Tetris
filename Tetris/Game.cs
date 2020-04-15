@@ -153,19 +153,20 @@ namespace Tetris
         }
         private void check_lines()
         {
-            int lines = 0;  //lines deleted this check
-            for (int y = 0; y < 20; y++)
+            //deleted lines from the TOP
+            int deleted = 0;
+            for (int y = 19; y >= 0; y--)
             {
                 bool filled = true; //assume filled
                 for (int x = 0; x < 10; x++)
                     if (board[Tuple.Create(x,y)] == '.') { filled = false; }
-                if (!filled)
+                if (filled)
                 {
                     delete_line(y);
-                    lines++;
+                    deleted++;
                 }
             }
-            if (lines > 0) { Console.WriteLine("you removed {0} Lines", lines); }
+            if (deleted > 0) { Console.WriteLine("you removed {0} Lines", deleted); }
         }
         private void Game_Tick(Object myObject, EventArgs myEventArgs)
         {
