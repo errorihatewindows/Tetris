@@ -34,11 +34,16 @@ namespace Tetris
         {
             return blocks[color]();
         }
-        //applies downward movement, doesnt check collision
+        //reduce y axis setter
         public void gravity()
         {
             position = Tuple.Create(position.Item1,position.Item2 - 1);
         }  
+        //x axis setter
+        public void move(int direction)
+        {
+            position = Tuple.Create(position.Item1 + direction, position.Item2);
+        }
         public void Rotate()
         {
             rotation = (rotation + 1) % 4;
