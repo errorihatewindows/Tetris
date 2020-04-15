@@ -140,7 +140,7 @@ namespace Tetris
         //Toggle Fullscreen F11
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            Tile_glow(3, 19);
+            Tile_glow(3, 0);
 
             if (e.KeyCode == Keys.F11)
             {
