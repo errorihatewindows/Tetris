@@ -106,6 +106,7 @@ namespace Tetris
                     board[block] = currentPiece.getColor();
                 }
                 currentPiece = null;
+                check_lines();
             }
         }
         //handles roation
@@ -139,6 +140,32 @@ namespace Tetris
                 if (board[current] != '.') { fail = true; break; }
             }
             if (fail) { currentPiece.move(-direction); }
+        }
+        //deletes a line and moves all pieces down
+        private void delete_line(int line)
+        {
+            //move lines down, this will overwrite the line that is overwritten
+            for (int y = line + 1; y < 20; y++) {
+                for (int x = 0; x < 10; x++) { 
+                    board[Tuple.Create(x, y - 1)] = board[Tuple.Create(x, y)]; } }
+            //set last line to '.'
+            for (int x = 0; x < 10; x++) { board[Tuple.Create(x, 19)] = '.'; }
+        }
+        private void check_lines()
+        {
+            int lines = 0;  //lines deleted this check
+            for (int y = 0; y < 20; y++)
+            {
+                bool filled = true; //assume filled
+                for (int x = 0; x < 10; x++)
+                    if (board[Tuple.Create(x,y)] == '.') { filled = false; }
+                if (!filled)
+                {
+                    delete_line(y);
+                    lines++;
+                }
+            }
+            if (lines > 0) { Console.WriteLine("you removed {0} Lines", lines); }
         }
         private void Game_Tick(Object myObject, EventArgs myEventArgs)
         {
