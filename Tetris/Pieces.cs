@@ -37,7 +37,7 @@ namespace Tetris
         //applies downward movement, doesnt check collision
         public void gravity()
         {
-
+            position = Tuple.Create(position.Item1,position.Item2 + 1);
         }  
         public void Rotate()
         {
