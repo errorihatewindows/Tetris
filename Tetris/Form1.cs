@@ -74,7 +74,17 @@ namespace Tetris
         //Draws BG
         private void Draw_Background(Graphics l)
         {
-            l.FillRectangle(Brushes.Gray, (Size.Width / 2 - 150), 100, 300, 600);
+            //BG Color
+            l.FillRectangle(Brushes.CadetBlue, (Size.Width / 2 - 150), 100, 300, 600);
+
+            //Draw BG Grid
+            Pen pen = Pens.DarkSlateGray;
+            for (int j = 100; j < 700; j += 30)
+                l.DrawLine(pen, (Size.Width / 2 - 150), j, (Size.Width / 2 + 150), j);
+            for (int i = (Size.Width / 2 - 150); i < (Size.Width / 2 + 150); i += 30)
+                l.DrawLine(pen, i, 100, i, 700);
+
+            //Load UI
             l.DrawImage(Interface, (Size.Width / 2 - (150 + 191)), (100 - 17));
         }
 
