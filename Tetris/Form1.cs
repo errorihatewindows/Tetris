@@ -95,6 +95,30 @@ namespace Tetris
             l.DrawImage(Interface, (Size.Width / 2 - (150 + 191)), (100 - 17));
         }
 
+        public void Tile_glow(int x, int y)
+        {
+            Graphics glow = CreateGraphics();
+            string color = "";
+            
+            Board board = game.GetBoard();
+            Piece position = Tuple.Create(x, y);
+
+            //relative in absolute Koordinaten
+            x = (x * 30) + (Size.Width / 2 - 150);
+            y = ((19 - y) * 30) + 100;
+
+            if (board[position] == 'l')
+                color = "lightblue";
+
+            Bitmap Picture;
+            for (int i = 0; i < 20; i++)
+            {
+                Picture = new Bitmap("Glow\\" + color + "_glow\\" + i.ToString() + ".png");
+                glow.DrawImageUnscaled(Picture, x, y);
+                wait(100);
+            }         
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             game.start_timer();
@@ -103,6 +127,8 @@ namespace Tetris
         //Toggle Fullscreen F11
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            Tile_glow(3, 19);
+
             if (e.KeyCode == Keys.F11)
             {
                 if (WindowState == FormWindowState.Normal)
@@ -128,6 +154,26 @@ namespace Tetris
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Draw_Board(e.Graphics);
+        }
+
+        //Wartet gewisse anzahl millisekunden
+        public void wait(int milliseconds)
+        {
+            Timer timer1 = new Timer();
+            if (milliseconds == 0 || milliseconds < 0) return;
+            timer1.Interval = milliseconds;
+            timer1.Enabled = true;
+            timer1.Start();
+            timer1.Tick += (s, e) =>
+            {
+                timer1.Enabled = false;
+                timer1.Stop();
+            };
+            while (timer1.Enabled)
+            {
+                Application.DoEvents();
+            }
+
         }
     }
 }

@@ -69,7 +69,7 @@ namespace Tetris
         }
         private void Game_Tick(Object myObject, EventArgs myEventArgs)
         {
-            currentPiece.Rotate();
+            //currentPiece.Rotate();
             drawing.Invalidate();
         }
     }
