@@ -97,12 +97,129 @@ namespace Tetris
             output[3] = Tuple.Create(position.Item1 + 1, position.Item2 + 1);
             return output;
         }
-        /*
         private Piece[] SBlock()
+        {
+            Piece[] output = new Piece[4];
+
+            output[0] = position;
+            
+            if (rotation == 0)
+            {
+                output[1] = Tuple.Create(position.Item1 - 1, position.Item2 + 1);
+                output[2] = Tuple.Create(position.Item1, position.Item2 + 1);
+                output[3] = Tuple.Create(position.Item1 + 1, position.Item2);
+            }
+            if (rotation == 1)
+            {
+                output[1] = Tuple.Create(position.Item1 + 1, position.Item2 + 1);
+                output[2] = Tuple.Create(position.Item1, position.Item2 - 1);
+                output[3] = Tuple.Create(position.Item1 + 1, position.Item2);
+            }
+            if (rotation == 2)
+            {
+                output[1] = Tuple.Create(position.Item1 - 1, position.Item2 );
+                output[2] = Tuple.Create(position.Item1, position.Item2 - 1);
+                output[3] = Tuple.Create(position.Item1 + 1, position.Item2 - 1);
+            }
+            if (rotation == 3)
+            {
+                output[1] = Tuple.Create(position.Item1, position.Item2 + 1);
+                output[2] = Tuple.Create(position.Item1 - 1, position.Item2);
+                output[3] = Tuple.Create(position.Item1 - 1, position.Item2 - 1);
+            }
+
+
+            return output;
+        }
         private Piece[] ZBlock()
+        {
+            Piece[] output = new Piece[4];
+
+            output[0] = position;
+
+            if (rotation == 0)
+            {
+                output[1] = Tuple.Create(position.Item1, position.Item2 - 1);
+                output[2] = Tuple.Create(position.Item1, position.Item2 + 1);
+                output[3] = Tuple.Create(position.Item1 + 1, position.Item2 + 1);
+            }
+            if (rotation == 1)
+            {
+                output[1] = Tuple.Create(position.Item1, position.Item2 + 1);
+                output[2] = Tuple.Create(position.Item1 + 1, position.Item2);
+                output[3] = Tuple.Create(position.Item1 + 1, position.Item2 - 1);
+            }
+            if (rotation == 2)
+            {
+                output[1] = Tuple.Create(position.Item1 - 1, position.Item2 - 1);
+                output[2] = Tuple.Create(position.Item1, position.Item2 - 1);
+                output[3] = Tuple.Create(position.Item1 + 1, position.Item2);
+            }
+            if (rotation == 3)
+            {
+                output[1] = Tuple.Create(position.Item1 - 1, position.Item2 + 1);
+                output[2] = Tuple.Create(position.Item1 - 1, position.Item2);
+                output[3] = Tuple.Create(position.Item1, position.Item2 - 1);
+            }
+
+            return output;
+        }
+
         private Piece[] LBlock()
+        {
+            Piece[] output = new Piece[4];
+
+            output[0] = position;
+
+            if (rotation % 2 == 0)
+            {
+                output[1] = Tuple.Create(position.Item1 - 1, position.Item2);
+                output[2] = Tuple.Create(position.Item1 + 1, position.Item2);
+            }
+            if (rotation % 2 == 1)
+            {
+                output[1] = Tuple.Create(position.Item1, position.Item2 - 1);
+                output[2] = Tuple.Create(position.Item1, position.Item2 + 1);
+            }
+            if (rotation == 0)
+                output[3] = Tuple.Create(position.Item1 + 1, position.Item2 + 1);
+            if (rotation == 1)
+                output[3] = Tuple.Create(position.Item1 + 1, position.Item2 - 1);
+            if (rotation == 2)
+                output[3] = Tuple.Create(position.Item1 - 1, position.Item2 - 1);
+            if (rotation == 3)
+                output[3] = Tuple.Create(position.Item1 - 1, position.Item2 + 1);
+
+            return output;
+        }
+            
         private Piece[] JBlock()
-        private Piece[] TBlock()*/
+        {
+            Piece[] output = new Piece[4];
+
+            output[0] = position;
+
+            if (rotation % 2 == 0)
+            {
+                output[1] = Tuple.Create(position.Item1 - 1, position.Item2);
+                output[2] = Tuple.Create(position.Item1 + 1, position.Item2);
+            }
+            if (rotation % 2 == 1)
+            {
+                output[1] = Tuple.Create(position.Item1, position.Item2 - 1);
+                output[2] = Tuple.Create(position.Item1, position.Item2 + 1);
+            }
+            if (rotation == 0)
+                output[3] = Tuple.Create(position.Item1 - 1, position.Item2 + 1);
+            if (rotation == 1)
+                output[3] = Tuple.Create(position.Item1 + 1, position.Item2 + 1);
+            if (rotation == 2)
+                output[3] = Tuple.Create(position.Item1 + 1, position.Item2 - 1);
+            if (rotation == 3)
+                output[3] = Tuple.Create(position.Item1 - 1, position.Item2 - 1);
+
+            return output;
+        }
     }
 
 }
