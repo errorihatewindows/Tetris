@@ -27,7 +27,6 @@ namespace Tetris
             Game_Timer.Interval = (Convert.ToInt32(1000 / FPS));
             Game_Timer.Tick += new EventHandler(Game_Tick);
             Generate_Board();
-            currentPiece = new Pieces('l');
         }
         //-----------------
         //getter
