@@ -74,17 +74,14 @@ namespace Tetris
             bool Kill = false;
             Piece[] old = currentPiece.Blocks();
             currentPiece.gravity();
-            Console.WriteLine("collison check:");
             //mark piece for kill based on the position after update
             foreach (Piece check in currentPiece.Blocks())
             {
-                Console.WriteLine("Piece: {0}", check);
                 //floor collision
                 if (check.Item2 < 0) { Kill = true; break; }
                 //collision with another piece
                 if (board[check] != '.') { Kill = true; break; }
             }
-            Console.WriteLine("kill order: {0}", Kill);
             //kills the piece, applying its last valid coordinates as stable blocks
             if (Kill)
             {
