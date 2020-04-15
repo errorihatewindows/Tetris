@@ -12,6 +12,21 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -92,6 +107,26 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="blue.png" />
+    <Content Include="Glow Effect_00000.png" />
+    <Content Include="Glow Effect_00001.png" />
+    <Content Include="Glow Effect_00002.png" />
+    <Content Include="Glow Effect_00003.png" />
+    <Content Include="Glow Effect_00004.png" />
+    <Content Include="Glow Effect_00005.png" />
+    <Content Include="Glow Effect_00006.png" />
+    <Content Include="Glow Effect_00007.png" />
+    <Content Include="Glow Effect_00008.png" />
+    <Content Include="Glow Effect_00009.png" />
+    <Content Include="Glow Effect_00010.png" />
+    <Content Include="Glow Effect_00011.png" />
+    <Content Include="Glow Effect_00012.png" />
+    <Content Include="Glow Effect_00013.png" />
+    <Content Include="Glow Effect_00014.png" />
+    <Content Include="Glow Effect_00015.png" />
+    <Content Include="Glow Effect_00016.png" />
+    <Content Include="Glow Effect_00017.png" />
+    <Content Include="Glow Effect_00018.png" />
+    <Content Include="Glow Effect_00019.png" />
     <Content Include="green.png" />
     <Content Include="lightblue.png" />
     <Content Include="Logo.ico" />
@@ -100,6 +135,18 @@
     <Content Include="red.png" />
     <Content Include="TempBG.png" />
     <Content Include="yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 und x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
