@@ -12,9 +12,11 @@ namespace Tetris
 {
     public class Game
     {
-        private const int FPS = 30;
+        private const int FPS = 1;
         private Board board = new Board();
         private Timer Game_Timer = new Timer();
+        private Pieces currentPiece;
+        //util function classes
         Random rand = new Random();
         Form drawing;
         public Game(Form form)
@@ -24,12 +26,20 @@ namespace Tetris
             Game_Timer.Interval = (Convert.ToInt32(1000 / FPS));
             Game_Timer.Tick += new EventHandler(Game_Tick);
             Generate_Board();
+            currentPiece = new Pieces('l');
         }
         //-----------------
         //getter
         public Board GetBoard()
         {
-            return board;
+            Board tempBoard = new Board(board);
+            if (currentPiece != null)
+            {
+                //draws Piece on the board
+                foreach (Piece current in currentPiece.Blocks())
+                    tempBoard[current] = currentPiece.getColor();
+            }
+            return tempBoard;
         }
         public bool is_running() { return Game_Timer.Enabled; }
         //------------------
@@ -59,15 +69,7 @@ namespace Tetris
         }
         private void Game_Tick(Object myObject, EventArgs myEventArgs)
         {
-            List<Piece> valid = new List<Piece>();
-            foreach (KeyValuePair<Piece, char> kvp in board)
-            {
-                if (kvp.Value == '.') { valid.Add(kvp.Key); }
-            }
-
-            if (valid.Count != 0)
-                board[valid[rand.Next(valid.Count)]] = util.colors[rand.Next(util.colors.Length)];
-
+            currentPiece.Rotate();
             drawing.Invalidate();
         }
     }
