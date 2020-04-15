@@ -121,9 +121,9 @@ namespace Tetris
             }
             if (rotation == 2)
             {
-                output[1] = Tuple.Create(position.Item1 + 1, position.Item2);
-                output[2] = Tuple.Create(position.Item1 - 1, position.Item2);
-                output[3] = Tuple.Create(position.Item1 - 1, position.Item2 - 1);
+                output[1] = Tuple.Create(position.Item1 - 1, position.Item2 - 1);
+                output[2] = Tuple.Create(position.Item1, position.Item2 - 1);
+                output[3] = Tuple.Create(position.Item1 + 1, position.Item2);
             }
             if (rotation == 3)
             {
@@ -155,15 +155,15 @@ namespace Tetris
             }
             if (rotation == 2)
             {
-                output[1] = Tuple.Create(position.Item1 - 1, position.Item2 - 1);
+                output[1] = Tuple.Create(position.Item1 - 1, position.Item2);
                 output[2] = Tuple.Create(position.Item1, position.Item2 - 1);
-                output[3] = Tuple.Create(position.Item1 + 1, position.Item2);
+                output[3] = Tuple.Create(position.Item1 + 1, position.Item2 - 1);
             }
             if (rotation == 3)
             {
-                output[1] = Tuple.Create(position.Item1 - 1, position.Item2 + 1);
+                output[1] = Tuple.Create(position.Item1, position.Item2 + 1);
                 output[2] = Tuple.Create(position.Item1 - 1, position.Item2);
-                output[3] = Tuple.Create(position.Item1, position.Item2 - 1);
+                output[3] = Tuple.Create(position.Item1 - 1, position.Item2 - 1);
             }
 
             return output;
