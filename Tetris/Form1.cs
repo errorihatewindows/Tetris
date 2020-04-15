@@ -25,6 +25,8 @@ namespace Tetris
 
         Bitmap Interface = new Bitmap(@"UI.png");
 
+        char lastInput = '.';
+
         public Form1()
         {
             InitializeComponent();
@@ -32,6 +34,18 @@ namespace Tetris
 
             DoubleBuffered = true;
 
+        }
+
+        //Returns last KeyStroke
+        public char get_Input()
+        {
+
+            char tempInput = lastInput;
+            //Clear last Key Input
+            lastInput = '.';
+
+            //Return last Input
+            return tempInput;
         }
 
         //draws full Board
@@ -95,6 +109,7 @@ namespace Tetris
             l.DrawImage(Interface, (Size.Width / 2 - (150 + 191)), (100 - 17));
         }
 
+        //Glow animation
         public void Tile_glow(int x, int y)
         {
             Graphics glow = CreateGraphics();
@@ -140,8 +155,7 @@ namespace Tetris
         //Toggle Fullscreen F11
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            Tile_glow(4, 19);
-
+            //Toggle Fullscreen
             if (e.KeyCode == Keys.F11)
             {
                 if (WindowState == FormWindowState.Normal)
@@ -167,6 +181,20 @@ namespace Tetris
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             Draw_Board(e.Graphics);
+        }
+
+        //Users Last Input
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Store Users last Input
+            if (e.KeyChar == (char)Keys.Up)
+                lastInput = 'U';
+            if (e.KeyChar == (char)Keys.Down)
+                lastInput = 'D';
+            if (e.KeyChar == (char)Keys.Right)
+                lastInput = 'R';
+            if (e.KeyChar == (char)Keys.Left)
+                lastInput = 'L';
         }
 
         //Wartet gewisse anzahl millisekunden
