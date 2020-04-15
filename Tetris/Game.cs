@@ -19,8 +19,8 @@ namespace Tetris
         private Pieces currentPiece;
         //util function classes
         Random rand = new Random();
-        Form drawing;
-        public Game(Form form)
+        Form1 drawing;
+        public Game(Form1 form)
         {
             drawing = form;
             //initialize game timer
