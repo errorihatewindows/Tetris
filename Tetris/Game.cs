@@ -29,6 +29,9 @@ namespace Tetris
             Generate_Board();
 
             currentPiece = new Pieces('p');
+            gravity();
+            gravity();
+            gravity();
 
         }
         //-----------------
@@ -108,8 +111,7 @@ namespace Tetris
                 gravity();
                 tickCount = 0;
             }*/
-            currentPiece = new Pieces(util.colors[tickCount]);
-            tickCount = (tickCount + 1) % 7;
+            currentPiece.Rotate();
             drawing.Invalidate();
         }
 
