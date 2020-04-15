@@ -127,20 +127,21 @@ namespace Tetris
             {      
                 Picture = new Bitmap("Glow\\" + color + " (" + i.ToString() + ").png");
                 glow.DrawImage(Picture, x, y);
-                //Invalidate(new Rectangle(x, y, 30, 30));
-                wait(100);
+                Invalidate(new Rectangle(0, 0, 300, 300));
+                wait(75);
             }         
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             game.start_timer();
+            game.stop_timer();
         }
 
         //Toggle Fullscreen F11
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            Tile_glow(3, 0);
+            Tile_glow(3, 19);
 
             if (e.KeyCode == Keys.F11)
             {
