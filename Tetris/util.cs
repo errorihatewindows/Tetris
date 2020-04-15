@@ -7,7 +7,7 @@ namespace Tetris
     {
         //contains all possible colors
         public static char[] colors = { 'g', 'y', 'r', 'l', 'b', 'p', 'o' };
-        static public void wait(int milliseconds)
+        public static void wait(int milliseconds)
         {
             Timer timer1 = new Timer();
             if (milliseconds == 0 || milliseconds < 0) return;
