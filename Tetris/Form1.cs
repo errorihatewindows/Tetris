@@ -60,19 +60,19 @@ namespace Tetris
             x = (x * 30) + (Size.Width / 2 - 150);
             y = ((19 - y) * 30) + 100;
 
-            if (Color == 'r' || Color == 'R')
+            if (Color == 'r')
                 l.DrawImage(red, x, y);
-            if (Color == 'b' || Color == 'B')
+            if (Color == 'b')
                 l.DrawImage(blue, x, y);
-            if (Color == 'y' || Color == 'Y')
+            if (Color == 'y')
                 l.DrawImage(yellow, x, y);
-            if (Color == 'g' || Color == 'G')
+            if (Color == 'g')
                 l.DrawImage(green, x, y);
-            if (Color == 'o' || Color == 'O')
+            if (Color == 'o')
                 l.DrawImage(orange, x, y);
-            if (Color == 'p' || Color == 'P')
+            if (Color == 'p')
                 l.DrawImage(purple, x, y);
-            if (Color == 'l' || Color == 'L')
+            if (Color == 'l')
                 l.DrawImage(lightblue, x, y);
         }
 
@@ -109,12 +109,25 @@ namespace Tetris
 
             if (board[position] == 'l')
                 color = "lightblue";
+            if (board[position] == 'b')
+                color = "blue";
+            if (board[position] == 'g')
+                color = "green";
+            if (board[position] == 'o')
+                color = "orange";
+            if (board[position] == 'p')
+                color = "purple";
+            if (board[position] == 'y')
+                color = "yellow";
+            if (board[position] == 'r')
+                color = "red";
 
             Bitmap Picture;
             for (int i = 1; i < 21; i++)
-            {
+            {      
                 Picture = new Bitmap("Glow\\" + color + " (" + i.ToString() + ").png");
                 glow.DrawImage(Picture, x, y);
+                //Invalidate(new Rectangle(x, y, 30, 30));
                 wait(100);
             }         
         }
