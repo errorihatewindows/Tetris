@@ -43,7 +43,12 @@ namespace Tetris
 
             //Draws each Piece int the Board
             foreach (KeyValuePair<Piece, char> position in board)
+            {
+                if (position.Key.Item1 < 0 || position.Key.Item1 > 9 || position.Key.Item2 < 0 || position.Key.Item2 > 19) { continue; }
+                    
                 Draw_Piece(position.Key.Item1, position.Key.Item2, board[position.Key], l);
+            }
+
 
         }
 
@@ -74,11 +79,13 @@ namespace Tetris
         //Draws BG
         private void Draw_Background(Graphics l)
         {
+
             //BG Color
-            l.FillRectangle(Brushes.CadetBlue, (Size.Width / 2 - 150), 100, 300, 600);
+            Brush brush = new SolidBrush(Color.FromArgb(6, 26, 51));
+            l.FillRectangle(brush, (Size.Width / 2 - 150), 100, 300, 600);
 
             //Draw BG Grid
-            Pen pen = Pens.DarkSlateGray;
+            Pen pen = new Pen(Color.FromArgb(29, 88, 171), 2);
             for (int j = 100; j < 700; j += 30)
                 l.DrawLine(pen, (Size.Width / 2 - 150), j, (Size.Width / 2 + 150), j);
             for (int i = (Size.Width / 2 - 150); i < (Size.Width / 2 + 150); i += 30)
