@@ -71,7 +71,7 @@ namespace Tetris
         {
             currentPiece = null;
             stop_timer();
-            MessageBox.Show("あなたは失う");
+            MessageBox.Show("You are fucking bad at TETRIS");
         }
         //handles gravity, setting blocks as final, Tetris check and removing the current piece
         private void gravity()
