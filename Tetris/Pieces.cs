@@ -25,7 +25,7 @@ namespace Tetris
             color = Color;
             rotation = 0;
             if (color == 'l') { position = Tuple.Create(5, 19); }
-            else { position = Tuple.Create(0, 18); }
+            else { position = Tuple.Create(4, 18); }
             init_dicts();
 
         }
@@ -68,10 +68,11 @@ namespace Tetris
         //Block function for the blocks dictionary
         private void init_blocks()
         {
-            blocks['l'] = IBlocks;
-            //TODO add other 6 blocks
+            blocks['l'] = IBlock;
+            blocks['y'] = OBlock;
+            //TODO add other 5 blocks
         }
-        private Piece[] IBlocks() 
+        private Piece[] IBlock() 
         {
             int[] relative = { -2, -1, 0, 1 };
             int sign;   //contains -1 or 1
@@ -86,13 +87,22 @@ namespace Tetris
                 else { output[i] = Tuple.Create(position.Item1, position.Item2 + relative[i] * sign); }
             }
             return output;
-        }/*not yet finished
-        private Piece[] OBlock() { }
-        private Piece[] SBlock() { }
-        private Piece[] ZBlock() { }
-        private Piece[] LBlock() { }
-        private Piece[] JBlock() { }
-        private Piece[] TBlock() { }*/
+        }
+        private Piece[] OBlock()
+        {
+            Piece[] output = new Piece[4];
+            output[0] = position;
+            output[1] = Tuple.Create(position.Item1, position.Item2 + 1);
+            output[2] = Tuple.Create(position.Item1 + 1, position.Item2);
+            output[3] = Tuple.Create(position.Item1 + 1, position.Item2 + 1);
+            return output;
+        }
+        /*
+        private Piece[] SBlock()
+        private Piece[] ZBlock()
+        private Piece[] LBlock()
+        private Piece[] JBlock()
+        private Piece[] TBlock()*/
     }
 
 }
