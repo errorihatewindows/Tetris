@@ -114,7 +114,7 @@ namespace Tetris
             for (int i = 0; i < 20; i++)
             {
                 Picture = new Bitmap("Glow\\" + color + "_glow\\" + i.ToString() + ".png");
-                glow.DrawImageUnscaled(Picture, x, y);
+                glow.DrawImage(Picture, x, y);
                 wait(100);
             }         
         }
