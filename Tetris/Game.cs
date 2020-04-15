@@ -170,6 +170,7 @@ namespace Tetris
         }
         private void Game_Tick(Object myObject, EventArgs myEventArgs)
         {
+                           
             //piece got killed last tick
             if (currentPiece == null)
             {

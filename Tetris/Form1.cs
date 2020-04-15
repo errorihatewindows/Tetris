@@ -99,7 +99,7 @@ namespace Tetris
             l.FillRectangle(brush, (Size.Width / 2 - 150), 100, 300, 600);
 
             //Draw BG Grid
-            Pen pen = new Pen(Color.FromArgb(29, 88, 171), 2);
+            Pen pen = new Pen(Color.FromArgb(1, 35, 94), 2);
             for (int j = 100; j < 700; j += 30)
                 l.DrawLine(pen, (Size.Width / 2 - 150), j, (Size.Width / 2 + 150), j);
             for (int i = (Size.Width / 2 - 150); i < (Size.Width / 2 + 150); i += 30)
