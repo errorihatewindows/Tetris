@@ -32,6 +32,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Win32Resource>C:\Users\Markus\Desktop\Tetris\Tetris\Logo.ico</Win32Resource>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -87,6 +94,7 @@
     <Content Include="blue.png" />
     <Content Include="green.png" />
     <Content Include="lightblue.png" />
+    <Content Include="Logo.ico" />
     <Content Include="orange.png" />
     <Content Include="purple.png" />
     <Content Include="red.png" />
