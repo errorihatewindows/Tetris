@@ -13,7 +13,7 @@ namespace Tetris
     public class Game
     {
         private int tickCount = 0;
-        private const int FPS = 40;
+        private const int FPS = 30;
         private Board board = new Board();
         private Timer Game_Timer = new Timer();
         private Pieces currentPiece;
@@ -32,11 +32,12 @@ namespace Tetris
         //getter
         public Board GetBoard()
         {
+            if (currentPiece == null) { return board; }
             Board tempBoard = new Board(board);
             if (currentPiece != null)
             {
                 //draws Piece on the board
-                foreach (Piece current in currentPiece.Blocks())
+                foreach (Piece current in currentPiece.Blocks())    
                     tempBoard[current] = currentPiece.getColor();
             }
             return tempBoard;
@@ -57,6 +58,13 @@ namespace Tetris
         }
         //--------------------
         //private functions
+        private bool in_board(Piece position)
+        {
+            if (position.Item1 < 0 || position.Item2 < 0 ||
+                position.Item1 > 9 || position.Item2 > 19)
+            { return false; }
+            return true;
+        }
         private void Generate_Board()
         {
             for (int x = 0; x < 10; x++)
@@ -100,11 +108,40 @@ namespace Tetris
                 currentPiece = null;
             }
         }
+        //handles roation
+        private void Rotate()
+        {
+            //TODO add wallkicks
+            Piece[] old = currentPiece.Blocks();
+            currentPiece.Rotate();
+            bool fail = false;
+            foreach (Piece current in currentPiece.Blocks())
+            {
+                //out of board
+                if (!in_board(current))
+                    { fail = true; break; }
+                //piece blocks
+                if (board[current] != '.') { fail = true; break; }
+            }
+            if (fail) { currentPiece.Rotate(true); }
+        }
+        //moves piece by 1 or -1
+        private void move(int direction)
+        {
+            bool fail = false;
+            Piece[] old = currentPiece.Blocks();
+            currentPiece.move(direction);
+            foreach (Piece current in currentPiece.Blocks())
+            {
+                //out of border
+                if (!in_board(current)) { fail = true; break; }
+                //piece in da way
+                if (board[current] != '.') { fail = true; break; }
+            }
+            if (fail) { currentPiece.move(-direction); }
+        }
         private void Game_Tick(Object myObject, EventArgs myEventArgs)
         {
-
-            Console.WriteLine(drawing.get_Input());
-
             //piece got killed last tick
             if (currentPiece == null)
             {
@@ -112,14 +149,33 @@ namespace Tetris
                 drawing.Invalidate();
                 return;
             }
+            //user input
+            char input = drawing.get_Input();
+            bool changed = true;    //resets to false if the switch defaults
+            switch (input)
+            {
+                case 'L':
+                    move(-1); break;
+                case 'R':
+                    move(1); break;
+                case 'U':
+                    //TODO add handler, rotates are not always valid
+                    Rotate(); break;
+                case 'D':
+                    gravity(); break;
+                default:
+                    changed = false; break;
+            }
             tickCount++;
+            if (currentPiece == null) { drawing.Invalidate(); return; }
             //only apply natural gravity every x ticks
-            if (tickCount >= 1)
+            if (tickCount >= 10)
             {
                 gravity();
                 tickCount = 0;
+                changed = true;
             }
-            drawing.Invalidate();
+            if (changed) { drawing.Invalidate(); }
         }
 
     }

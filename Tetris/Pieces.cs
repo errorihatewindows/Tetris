@@ -44,17 +44,20 @@ namespace Tetris
         {
             position = Tuple.Create(position.Item1 + direction, position.Item2);
         }
-        public void Rotate()
+        public void Rotate(bool reverse = false)
         {
-            rotation = (rotation + 1) % 4;
+            //if its reversed first move the position of I back then rotate
+            if (!reverse)  { rotation = (rotation + 1) % 4; }
             //I piece moves focus while rotating
             if (color == 'l') 
             {
+                int sign = 1;
+                if (reverse) { sign = -1; }
                 position = Tuple.Create(
-                    position.Item1 + rotating[rotation].Item1,
-                    position.Item2 + rotating[rotation].Item2);
+                    position.Item1 + rotating[rotation].Item1 * sign,
+                    position.Item2 + rotating[rotation].Item2 * sign);
             }
-            //TODO add reverse rotate option
+            if (reverse) { rotation = (rotation + 3) % 4; }
         }
         //inits all the diffrent dicts used in current piece
         private void init_dicts()
