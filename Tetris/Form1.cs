@@ -135,7 +135,6 @@ namespace Tetris
         private void Form1_Load(object sender, EventArgs e)
         {
             game.start_timer();
-            game.stop_timer();
         }
 
         //Toggle Fullscreen F11

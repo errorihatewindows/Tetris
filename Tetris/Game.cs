@@ -13,7 +13,7 @@ namespace Tetris
     public class Game
     {
         private int tickCount = 0;
-        private const int FPS = 10;
+        private const int FPS = 1;
         private Board board = new Board();
         private Timer Game_Timer = new Timer();
         private Pieces currentPiece;
@@ -94,6 +94,7 @@ namespace Tetris
         }
         private void Game_Tick(Object myObject, EventArgs myEventArgs)
         {
+            /*
             //piece got killed last tick
             if (currentPiece == null)
             {
@@ -106,7 +107,9 @@ namespace Tetris
             {
                 gravity();
                 tickCount = 0;
-            }
+            }*/
+            currentPiece = new Pieces(util.colors[tickCount]);
+            tickCount = (tickCount + 1) % 7;
             drawing.Invalidate();
         }
 

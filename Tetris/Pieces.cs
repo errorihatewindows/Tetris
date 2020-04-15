@@ -70,8 +70,11 @@ namespace Tetris
         {
             blocks['l'] = IBlock;
             blocks['y'] = OBlock;
+            blocks['g'] = SBlock;
+            blocks['r'] = ZBlock;
+            blocks['o'] = LBlock;
+            blocks['b'] = JBlock;
             blocks['p'] = TBlock;
-            //TODO add other 5 blocks
         }
         private Piece[] IBlock() 
         {
@@ -98,11 +101,10 @@ namespace Tetris
             output[3] = Tuple.Create(position.Item1 + 1, position.Item2 + 1);
             return output;
         }
-        /*
         private Piece[] SBlock()
         private Piece[] ZBlock()
         private Piece[] LBlock()
-        private Piece[] JBlock() */
+        private Piece[] JBlock()
         private Piece[] TBlock()
         {
             Piece[] output = new Piece[4];
