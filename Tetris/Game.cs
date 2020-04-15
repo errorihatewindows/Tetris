@@ -12,7 +12,8 @@ namespace Tetris
 {
     public class Game
     {
-        private const int FPS = 1;
+        private int tickCount = 0;
+        private const int FPS = 4;
         private Board board = new Board();
         private Timer Game_Timer = new Timer();
         private Pieces currentPiece;
@@ -67,11 +68,42 @@ namespace Tetris
                 }
             }
         }
+        //handles gravity, setting blocks as final, Tetris check and removing the current piece
+        private void gravity()
+        {
+            bool Kill = false;
+            Piece[] old = currentPiece.Blocks();
+            currentPiece.gravity();
+            Console.WriteLine("collison check:");
+            //mark piece for kill based on the position after update
+            foreach (Piece check in currentPiece.Blocks())
+            {
+                Console.WriteLine("Piece: {0}", check);
+                //floor collision
+                if (check.Item2 < 0) { Kill = true; break; }
+                //collision with another piece
+                if (board[check] != '.') { Kill = true; break; }
+            }
+            Console.WriteLine("kill order: {0}", Kill);
+            //kills the piece, applying its last valid coordinates as stable blocks
+            if (Kill)
+            {
+                //set blocks as final
+                foreach (Piece block in old) { board[block] = currentPiece.getColor(); }
+                currentPiece = null;
+            }
+        }
         private void Game_Tick(Object myObject, EventArgs myEventArgs)
         {
-            currentPiece.Rotate();
-            currentPiece.gravity();
+            tickCount++;
+            //only apply natural gravity every x ticks
+            if (tickCount >= 1)
+            {
+                gravity();
+                tickCount = 0;
+            }
             drawing.Invalidate();
         }
+
     }
 }
