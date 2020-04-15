@@ -23,6 +23,8 @@ namespace Tetris
         Bitmap orange = new Bitmap(@"orange.png");
         Bitmap green = new Bitmap(@"green.png");
 
+        Bitmap Interface = new Bitmap(@"UI.png");
+
         public Form1()
         {
             InitializeComponent();
@@ -73,6 +75,7 @@ namespace Tetris
         private void Draw_Background(Graphics l)
         {
             l.FillRectangle(Brushes.Gray, (Size.Width / 2 - 150), 100, 300, 600);
+            l.DrawImage(Interface, (Size.Width / 2 - (150 + 191)), (100 - 17));
         }
 
         private void Form1_Load(object sender, EventArgs e)
