@@ -121,6 +121,19 @@ namespace Tetris
             l.DrawImage(Interface, (Size.Width / 2 - (150 + 191)), (100 - 17));
         }
 
+        //Displays Socre
+        public void display_score(int score)
+        {
+            string Score = Convert.ToString(score);
+            Graphics l = CreateGraphics();
+            for (int i = 0; i < Score.Length; i++)
+            {
+                Bitmap Num = new Bitmap(Score[i].ToString() + ".png");
+                Bitmap newNum = new Bitmap(Num, new Size(20, 20));
+                l.DrawImage(newNum, (Size.Width / 2) + 180 + (20 * i), 602); 
+            }
+        }
+
         //Glow animation
         public void Tile_glow(int x, int y)
         {
@@ -196,8 +209,6 @@ namespace Tetris
                 FormBorderStyle = FormBorderStyle.FixedSingle;
                 WindowState = FormWindowState.Normal;
             }
-
-
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)

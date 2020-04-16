@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 using Piece = System.Tuple<int, int>;
 using Board = System.Collections.Generic.Dictionary<System.Tuple<int, int>, char>;
@@ -13,7 +14,7 @@ namespace Tetris
     public class Game
     {
         private int tickCount = 0;
-        private const int FPS = 60;
+        private const int FPS = 120;
         private Board board = new Board();
         private Timer Game_Timer = new Timer();
         private Pieces currentPiece;
@@ -180,7 +181,7 @@ namespace Tetris
             if (currentPiece == null)
             {
                 currentPiece = new Pieces(util.colors[rand.Next(7)]);
-                drawing.Invalidate();
+                drawing.Invalidate(new Rectangle(((drawing.Size.Width / 2) - 150), 100, 300, 600));
                 return;
             }
             //user input
@@ -201,7 +202,7 @@ namespace Tetris
                     changed = false; break;
             }
             tickCount++;
-            if (currentPiece == null) { drawing.Invalidate(); return; }
+            if (currentPiece == null) { drawing.Invalidate(new Rectangle(((drawing.Size.Width / 2) - 150), 100, 300, 600)); return; }
             //only apply natural gravity every x ticks
             if (tickCount >= 18)
             {
@@ -209,7 +210,7 @@ namespace Tetris
                 tickCount = 0;
                 changed = true;
             }
-            if (changed) { drawing.Invalidate(); }
+            if (changed) { drawing.Invalidate(new Rectangle(((drawing.Size.Width / 2) - 150), 100, 300, 600)); }
         }
 
     }
