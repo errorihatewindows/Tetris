@@ -209,6 +209,8 @@ namespace Tetris
                 FormBorderStyle = FormBorderStyle.FixedSingle;
                 WindowState = FormWindowState.Normal;
             }
+
+            Invalidate();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
