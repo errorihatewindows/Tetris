@@ -86,8 +86,8 @@ namespace Tetris
 
 
             //relative in absolute Koordinaten
-            x = (x * 30) + (Size.Width / 2 - 150);
-            y = ((19 - y) * 30) + 100;
+            x = (x * size) + (Size.Width / 2 - 150);
+            y = ((19 - y) * size) + 100;
 
             if (Color == 'r')
             {
@@ -97,7 +97,7 @@ namespace Tetris
             if (Color == 'b')
             {
                 Bitmap blueScaled = new Bitmap(blue, new Size(size, size));
-                l.DrawImage(blue, x, y);
+                l.DrawImage(blueScaled, x, y);
             }
 
             if (Color == 'y')
@@ -168,8 +168,8 @@ namespace Tetris
             {
                 foreach (KeyValuePair<Piece, char> kvp in board)
                 {
-                    int x = kvp.Key.Item1 + 12;
-                    int y = kvp.Key.Item2 + 17;
+                    int x = kvp.Key.Item1 + 19;
+                    int y = kvp.Key.Item2 + 16;
 
                     Draw_Piece(x, y, kvp.Value, 20, l);
                 }
