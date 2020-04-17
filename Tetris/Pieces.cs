@@ -60,6 +60,79 @@ namespace Tetris
             }
             if (reverse) { rotation = (rotation + 3) % 4; }
         }
+        //returns a list of the relative positions
+        public Piece[] wallkick_relatives()
+        {
+            // square never kicks
+            if (color == 'y') { return new Piece[1]; }
+            // I has diffrent rules than all others
+            if (color == 'l') { return    Ikick(); }
+            else              { return notIkick(); }
+        }
+        private Piece[] Ikick()
+        {
+            Piece[] output = new Piece[5];
+            switch (rotation)
+            {
+                case 0:
+                    output[1] = Tuple.Create(-1, 0);
+                    output[2] = Tuple.Create(-1, 1);
+                    output[3] = Tuple.Create(0, -2);
+                    output[4] = Tuple.Create(-1, -2);
+                    break;
+                case 1:
+                    output[1] = Tuple.Create(1, 0);
+                    output[2] = Tuple.Create(1, -1);
+                    output[3] = Tuple.Create(0, 2);
+                    output[4] = Tuple.Create(1, 2);
+                    break;
+                case 2:
+                    output[1] = Tuple.Create(1, 0);
+                    output[2] = Tuple.Create(1, 1);
+                    output[3] = Tuple.Create(0, -2);
+                    output[4] = Tuple.Create(1, -2);
+                    break;
+                case 3:
+                    output[1] = Tuple.Create(-1, 0);
+                    output[2] = Tuple.Create(-1, -1);
+                    output[3] = Tuple.Create(0, 2);
+                    output[4] = Tuple.Create(-1, 2);
+                    break;
+            }
+            return output;
+        }
+        private Piece[] notIkick()
+        {
+            Piece[] output = new Piece[5];
+            switch (rotation)
+            {
+                case 0:
+                    output[1] = Tuple.Create(-2, 0);
+                    output[2] = Tuple.Create(1, 0);
+                    output[3] = Tuple.Create(-2, -1);
+                    output[4] = Tuple.Create(1, 2);
+                    break;
+                case 1:
+                    output[1] = Tuple.Create(-1, 0);
+                    output[2] = Tuple.Create(2, 0);
+                    output[3] = Tuple.Create(-1, 2);
+                    output[4] = Tuple.Create(2, -1);
+                    break;
+                case 2:
+                    output[1] = Tuple.Create(2, 0);
+                    output[2] = Tuple.Create(-1, 0);
+                    output[3] = Tuple.Create(2, 1);
+                    output[4] = Tuple.Create(-1, -2);
+                    break;
+                case 3:
+                    output[1] = Tuple.Create(1, 0);
+                    output[2] = Tuple.Create(-2, 0);
+                    output[3] = Tuple.Create(1, -2);
+                    output[4] = Tuple.Create(-2, 1);
+                    break;
+            }
+            return output;
+        }
         //inits all the diffrent dicts used in current piece
         private void init_dicts()
         {
