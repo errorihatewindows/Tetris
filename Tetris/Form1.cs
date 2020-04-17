@@ -39,7 +39,8 @@ namespace Tetris
 
             DoubleBuffered = true;
 
-
+            //sets global Sound Volume to 10
+            gameover.settings.volume = 10;
         }
 
 
@@ -62,12 +63,12 @@ namespace Tetris
         
             if (Sound == "gameover")
             {
-                gameover.settings.volume = 1;
+                gameover.settings.volume = 10;
                 gameover.URL = @"gameover.wav";
             }
             if (Sound == "line")
             {
-                line.settings.volume = 1;
+                line.settings.volume = 10;
                 line.URL = @"line.wav";
             }
             if (Sound == "stop")
