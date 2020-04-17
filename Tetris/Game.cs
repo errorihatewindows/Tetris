@@ -48,6 +48,18 @@ namespace Tetris
             return tempBoard;
         }
 
+        public Board GetNextPiece()
+        {
+            Board output = new Board();
+            //handle nextPiece not beeing set
+            if (nextPiece == null) { output[Tuple.Create(0, 0)] = '.'; return output; }
+            foreach (Piece current in nextPiece.Blocks())
+            {
+                output[current] = nextPiece.getColor();
+            }
+            return output;
+        }
+
         public int GetScore() { return Score; }
         public bool is_running() { return Game_Timer.Enabled; }
         //------------------
@@ -188,7 +200,6 @@ namespace Tetris
             {
                 currentPiece = nextPiece;   
                 nextPiece = new Pieces(util.colors[rand.Next(7)]);
-                //drawing.draw_nextPiece(nextPiece.Blocks(), nextPiece.getColor());
                 drawing.Invalidate();
                 return;
             }
