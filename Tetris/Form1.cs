@@ -40,8 +40,8 @@ namespace Tetris
             DoubleBuffered = true;
 
             //sets global Sound Volume to 10
-            gameover.settings.volume = 100;
-            line.settings.volume = 100;
+            line.settings.volume = 20;
+;
         }
 
 
@@ -64,15 +64,25 @@ namespace Tetris
         
             if (Sound == "gameover")
             {
+                line.settings.volume = 1;
                 gameover.URL = @"gameover.wav";
+                gameover.controls.play();
+                util.wait(2000);
+                line.settings.volume = 20;
             }
+
+            
             if (Sound == "line")
             {
+                line.settings.volume = 1;
                 line.URL = @"line.wav";
+                line.controls.play();
+                util.wait(300);
+                line.settings.volume = 20;
             }
             if (Sound == "stop")
                 BGMusic.Stop();
-           
+
         }
 
         //draws full Board
