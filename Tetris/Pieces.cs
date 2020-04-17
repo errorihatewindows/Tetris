@@ -30,6 +30,7 @@ namespace Tetris
 
         }
         public char getColor() { return color; }
+        public Piece getPosition() { return position; }
         public Piece[] Blocks()
         {
             return blocks[color]();

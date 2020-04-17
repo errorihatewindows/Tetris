@@ -55,7 +55,9 @@ namespace Tetris
             if (nextPiece == null) { output[Tuple.Create(0, 0)] = '.'; return output; }
             foreach (Piece current in nextPiece.Blocks())
             {
-                output[current] = nextPiece.getColor();
+                int x = current.Item1 - nextPiece.getPosition().Item1;
+                int y = current.Item2 - nextPiece.getPosition().Item2;
+                output[Tuple.Create(x,y)] = nextPiece.getColor();
             }
             return output;
         }
