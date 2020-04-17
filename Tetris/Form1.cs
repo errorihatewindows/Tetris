@@ -65,40 +65,66 @@ namespace Tetris
             //draw BG for playing Area
             Draw_Background(l);
 
-            display_score(game.GetScore(), l);
+            //paints Score
+            display_score(game.Score, l);
+            //Draws next Peace
+            draw_nextPiece();
 
             //Draws each Piece int the Board
             foreach (KeyValuePair<Piece, char> position in board)
             {
                 if (position.Key.Item1 < 0 || position.Key.Item1 > 9 || position.Key.Item2 < 0 || position.Key.Item2 > 19) { continue; }
                     
-                Draw_Piece(position.Key.Item1, position.Key.Item2, board[position.Key], l);
+                Draw_Piece(position.Key.Item1, position.Key.Item2, board[position.Key], 30, l);
             }
 
         }
 
         //draws Pieces on given Board
-        private void Draw_Piece(int x, int y, char Color, Graphics l)
+        private void Draw_Piece(int x, int y, char Color, int size ,Graphics l)
         {
+
 
             //relative in absolute Koordinaten
             x = (x * 30) + (Size.Width / 2 - 150);
             y = ((19 - y) * 30) + 100;
 
             if (Color == 'r')
-                l.DrawImage(red, x, y);
+            {
+                Bitmap redScaled = new Bitmap(red, new Size(size, size));
+                l.DrawImage(redScaled, x, y);
+            }
             if (Color == 'b')
+            {
+                Bitmap blueScaled = new Bitmap(blue, new Size(size, size));
                 l.DrawImage(blue, x, y);
+            }
+
             if (Color == 'y')
-                l.DrawImage(yellow, x, y);
+            {
+                Bitmap yellowScaled = new Bitmap(yellow, new Size(size, size));
+                l.DrawImage(yellowScaled, x, y);
+            }
             if (Color == 'g')
-                l.DrawImage(green, x, y);
+            {
+                Bitmap greenScaled = new Bitmap(green, new Size(size, size));
+                l.DrawImage(greenScaled, x, y);
+            }
             if (Color == 'o')
-                l.DrawImage(orange, x, y);
+            {
+                Bitmap orangeScaled = new Bitmap(orange, new Size(size, size));
+                l.DrawImage(orangeScaled, x, y);
+            }
             if (Color == 'p')
-                l.DrawImage(purple, x, y);
+            {
+                Bitmap purpleScaled = new Bitmap(purple, new Size(size, size));
+                l.DrawImage(purpleScaled, x, y);
+            }
             if (Color == 'l')
-                l.DrawImage(lightblue, x, y);
+            {
+                Bitmap lightblueScaled = new Bitmap(lightblue, new Size(size, size));
+                l.DrawImage(lightblueScaled, x, y);
+            }
         }
 
         //Draws BG
@@ -130,10 +156,21 @@ namespace Tetris
                 //Load Image
                 Bitmap Num = new Bitmap(Score[i].ToString() + ".png");
                 //Scale Down image
-                Bitmap newNum = new Bitmap(Num, new Size(20, 20));
+                Num = new Bitmap(Num, new Size(20, 20));
                 
-                l.DrawImage(newNum, (Size.Width / 2) + 180 + (25 * i), 602); 
+                l.DrawImage(Num, (Size.Width / 2) + 180 + (23 * i), 602); 
             }
+        }
+
+        public void draw_nextPiece(List<Piece> positions, char Color)
+        {
+            for (int i = 0; i < positions.Count; i++)
+            {
+                int x = positions[i].Item1 + 14;
+                int y = positions[i].Item2 + 17;
+                Draw_Piece(positions[i].Item1, positions[i].Item2, Color);
+            }
+
         }
 
         //Glow animation
@@ -214,7 +251,7 @@ namespace Tetris
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
-        {
+        {   
             Draw_Board(e.Graphics);
         }
 
