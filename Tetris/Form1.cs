@@ -66,9 +66,9 @@ namespace Tetris
             Draw_Background(l);
 
             //paints Score
-            display_score(game.Score, l);
+            display_score(game.GetScore(), l);
             //Draws next Peace
-            draw_nextPiece();
+            draw_nextPiece(game.GetNextPiece(), l);
 
             //Draws each Piece int the Board
             foreach (KeyValuePair<Piece, char> position in board)
@@ -162,13 +162,17 @@ namespace Tetris
             }
         }
 
-        public void draw_nextPiece(List<Piece> positions, char Color)
+        public void draw_nextPiece(Board board, Graphics l)
         {
-            for (int i = 0; i < positions.Count; i++)
+            if (board[Tuple.Create(0,0)] != '.')
             {
-                int x = positions[i].Item1 + 14;
-                int y = positions[i].Item2 + 17;
-                Draw_Piece(positions[i].Item1, positions[i].Item2, Color);
+                foreach (KeyValuePair<Piece, char> kvp in board)
+                {
+                    int x = kvp.Key.Item1 + 12;
+                    int y = kvp.Key.Item2 + 17;
+
+                    Draw_Piece(x, y, kvp.Value, 20, l);
+                }
             }
 
         }
