@@ -15,9 +15,10 @@ namespace Tetris
     {
         private int tickCount = 0;
         private const int FPS = 120;
-        public int Score = 0;
+        private int Score;
         private Board board = new Board();
         private Timer Game_Timer = new Timer();
+        private Pieces nextPiece;
         private Pieces currentPiece;
         //util function classes
         Random rand = new Random();
@@ -28,7 +29,9 @@ namespace Tetris
             //initialize game timer
             Game_Timer.Interval = (Convert.ToInt32(1000 / FPS));
             Game_Timer.Tick += new EventHandler(Game_Tick);
+            nextPiece = new Pieces(util.colors[rand.Next(7)]);
             Generate_Board();
+            Score = 0;
         }
         //-----------------
         //getter
@@ -44,6 +47,8 @@ namespace Tetris
             }
             return tempBoard;
         }
+
+        public int GetScore() { return Score; }
         public bool is_running() { return Game_Timer.Enabled; }
         //------------------
         //setter
@@ -83,7 +88,6 @@ namespace Tetris
             stop_timer();
             drawing.playSound("gameover");
             MessageBox.Show("You are fucking bad at TETRIS");
-            Score = 0;
         }
         //handles gravity, setting blocks as final, Tetris check and removing the current piece
         private void gravity()
@@ -182,7 +186,9 @@ namespace Tetris
             //piece got killed last tick
             if (currentPiece == null)
             {
-                currentPiece = new Pieces(util.colors[rand.Next(7)]);
+                currentPiece = nextPiece;   
+                nextPiece = new Pieces(util.colors[rand.Next(7)]);
+                //drawing.draw_nextPiece(nextPiece.Blocks(), nextPiece.getColor());
                 drawing.Invalidate();
                 return;
             }

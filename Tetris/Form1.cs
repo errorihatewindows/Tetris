@@ -66,7 +66,7 @@ namespace Tetris
             //draw BG for playing Area
             Draw_Background(l);
 
-            display_score(game.Score, l);
+            display_score(game.GetScore(), l);
 
             //Draws each Piece int the Board
             foreach (KeyValuePair<Piece, char> position in board)
