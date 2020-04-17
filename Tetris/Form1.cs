@@ -28,10 +28,9 @@ namespace Tetris
 
         char lastInput = '.';
 
-        SoundPlayer Music = new SoundPlayer();
-        SoundPlayer Sounds = new SoundPlayer();
-
-
+        SoundPlayer BGMusic = new SoundPlayer(@"main_theme.wav");
+        WMPLib.WindowsMediaPlayer line = new WMPLib.WindowsMediaPlayer();
+        WMPLib.WindowsMediaPlayer gameover = new WMPLib.WindowsMediaPlayer();
 
         public Form1()
         {
@@ -39,7 +38,10 @@ namespace Tetris
             game = new Game(this);
 
             DoubleBuffered = true;
+
+
         }
+
 
         //Returns last KeyStroke
         public char get_Input()
@@ -55,7 +57,22 @@ namespace Tetris
         //plays Sounds
         public void playSound(string Sound)
         {
-            //TODO: multiple WAV audio
+            if (Sound == "main")
+                BGMusic.PlayLooping();
+        
+            if (Sound == "gameover")
+            {
+                gameover.settings.volume = 1;
+                gameover.URL = @"gameover.wav";
+            }
+            if (Sound == "line")
+            {
+                line.settings.volume = 1;
+                line.URL = @"line.wav";
+            }
+            if (Sound == "stop")
+                BGMusic.Stop();
+           
         }
 
         //draws full Board
@@ -86,8 +103,8 @@ namespace Tetris
 
 
             //relative in absolute Koordinaten
-            x = (x * 30) + (Size.Width / 2 - 150);
-            y = ((19 - y) * 30) + 100;
+            x = (x * size) + (Size.Width / 2 - 150);
+            y = ((19 - y) * size) + 100;
 
             if (Color == 'r')
             {
@@ -97,7 +114,7 @@ namespace Tetris
             if (Color == 'b')
             {
                 Bitmap blueScaled = new Bitmap(blue, new Size(size, size));
-                l.DrawImage(blue, x, y);
+                l.DrawImage(blueScaled, x, y);
             }
 
             if (Color == 'y')
@@ -168,8 +185,8 @@ namespace Tetris
             {
                 foreach (KeyValuePair<Piece, char> kvp in board)
                 {
-                    int x = kvp.Key.Item1 + 12;
-                    int y = kvp.Key.Item2 + 17;
+                    int x = kvp.Key.Item1 + 19;
+                    int y = kvp.Key.Item2 + 16;
 
                     Draw_Piece(x, y, kvp.Value, 20, l);
                 }
@@ -218,6 +235,7 @@ namespace Tetris
         private void Form1_Load(object sender, EventArgs e)
         {
             game.start_timer();
+            playSound("main");
         }
 
         //Toggle Fullscreen F11
