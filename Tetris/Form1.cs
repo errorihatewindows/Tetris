@@ -28,10 +28,9 @@ namespace Tetris
 
         char lastInput = '.';
 
-        SoundPlayer Music = new SoundPlayer();
-        SoundPlayer Sounds = new SoundPlayer();
-
-
+        SoundPlayer BGMusic = new SoundPlayer(@"main_theme.wav");
+        WMPLib.WindowsMediaPlayer line = new WMPLib.WindowsMediaPlayer();
+        WMPLib.WindowsMediaPlayer gameover = new WMPLib.WindowsMediaPlayer();
 
         public Form1()
         {
@@ -39,7 +38,10 @@ namespace Tetris
             game = new Game(this);
 
             DoubleBuffered = true;
+
+
         }
+
 
         //Returns last KeyStroke
         public char get_Input()
@@ -55,7 +57,22 @@ namespace Tetris
         //plays Sounds
         public void playSound(string Sound)
         {
-            //TODO: multiple WAV audio
+            if (Sound == "main")
+                BGMusic.PlayLooping();
+        
+            if (Sound == "gameover")
+            {
+                gameover.settings.volume = 1;
+                gameover.URL = @"gameover.wav";
+            }
+            if (Sound == "line")
+            {
+                line.settings.volume = 1;
+                line.URL = @"line.wav";
+            }
+            if (Sound == "stop")
+                BGMusic.Stop();
+           
         }
 
         //draws full Board
@@ -217,7 +234,8 @@ namespace Tetris
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           game.start_timer();          
+            game.start_timer();
+            playSound("main");
         }
 
         //Toggle Fullscreen F11

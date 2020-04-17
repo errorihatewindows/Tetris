@@ -100,6 +100,7 @@ namespace Tetris
         {
             currentPiece = null;
             stop_timer();
+            drawing.playSound("stop");
             drawing.playSound("gameover");
             MessageBox.Show("You are fucking bad at TETRIS");
         }
@@ -192,6 +193,7 @@ namespace Tetris
             {
                 Score += util.points[deleted - 1]; //(* (Level + 1))
                 Console.WriteLine("you removed {0} Lines: total Points {1}", deleted, Score);
+                drawing.playSound("line");
             }
         }
         private void Game_Tick(Object myObject, EventArgs myEventArgs)
