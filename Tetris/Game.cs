@@ -174,7 +174,6 @@ namespace Tetris
             {
                 Score += util.points[deleted - 1]; //(* (Level + 1))
                 Console.WriteLine("you removed {0} Lines: total Points {1}", deleted, Score);
-                //drawing.display_score(Score);
             }
         }
         private void Game_Tick(Object myObject, EventArgs myEventArgs)
@@ -184,7 +183,7 @@ namespace Tetris
             if (currentPiece == null)
             {
                 currentPiece = new Pieces(util.colors[rand.Next(7)]);
-                drawing.Invalidate(new Rectangle(((drawing.Size.Width / 2) - 150), 100, 300, 600));
+                drawing.Invalidate();
                 return;
             }
             //user input
@@ -205,7 +204,7 @@ namespace Tetris
                     changed = false; break;
             }
             tickCount++;
-            if (currentPiece == null) { drawing.Invalidate(new Rectangle(((drawing.Size.Width / 2) - 150), 100, 300, 600)); return; }
+            if (currentPiece == null) { drawing.Invalidate(); return; }
             //only apply natural gravity every x ticks
             if (tickCount >= 18)
             {
@@ -213,7 +212,7 @@ namespace Tetris
                 tickCount = 0;
                 changed = true;
             }
-            if (changed) { drawing.Invalidate(new Rectangle(((drawing.Size.Width / 2) - 150), 100, 300, 600)); }
+            if (changed) { drawing.Invalidate(); }
         }
 
     }

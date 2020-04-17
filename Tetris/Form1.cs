@@ -39,7 +39,6 @@ namespace Tetris
             game = new Game(this);
 
             DoubleBuffered = true;
-
         }
 
         //Returns last KeyStroke
@@ -67,6 +66,8 @@ namespace Tetris
             //draw BG for playing Area
             Draw_Background(l);
 
+            display_score(game.Score, l);
+
             //Draws each Piece int the Board
             foreach (KeyValuePair<Piece, char> position in board)
             {
@@ -74,8 +75,6 @@ namespace Tetris
                     
                 Draw_Piece(position.Key.Item1, position.Key.Item2, board[position.Key], l);
             }
-
-            display_score(game.Score);
 
         }
 
@@ -123,15 +122,18 @@ namespace Tetris
         }
 
         //Displays Socre
-        public void display_score(int score)
+        public void display_score(int score, Graphics l)
         {
             string Score = Convert.ToString(score);
-            Graphics l = CreateGraphics();
+
             for (int i = 0; i < Score.Length; i++)
             {
+                //Load Image
                 Bitmap Num = new Bitmap(Score[i].ToString() + ".png");
+                //Scale Down image
                 Bitmap newNum = new Bitmap(Num, new Size(20, 20));
-                l.DrawImage(newNum, (Size.Width / 2) + 180 + (20 * i), 602); 
+                
+                l.DrawImage(newNum, (Size.Width / 2) + 180 + (25 * i), 602); 
             }
         }
 
@@ -175,7 +177,7 @@ namespace Tetris
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            game.start_timer();
+           game.start_timer();          
         }
 
         //Toggle Fullscreen F11
