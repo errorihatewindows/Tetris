@@ -15,6 +15,7 @@ namespace Tetris
     {
         private int tickCount = 0;
         private const int FPS = 120;
+        public int Score = 0;
         private Board board = new Board();
         private Timer Game_Timer = new Timer();
         private Pieces currentPiece;
@@ -82,6 +83,7 @@ namespace Tetris
             stop_timer();
             drawing.playSound("gameover");
             MessageBox.Show("You are fucking bad at TETRIS");
+            Score = 0;
         }
         //handles gravity, setting blocks as final, Tetris check and removing the current piece
         private void gravity()
@@ -170,8 +172,9 @@ namespace Tetris
             }
             if (deleted > 0) 
             {
-                drawing.playSound("deleteLine");
-                Console.WriteLine("you removed {0} Lines", deleted); 
+                Score += util.points[deleted - 1]; //(* (Level + 1))
+                Console.WriteLine("you removed {0} Lines: total Points {1}", deleted, Score);
+                //drawing.display_score(Score);
             }
         }
         private void Game_Tick(Object myObject, EventArgs myEventArgs)

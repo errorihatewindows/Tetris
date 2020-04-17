@@ -75,6 +75,7 @@ namespace Tetris
                 Draw_Piece(position.Key.Item1, position.Key.Item2, board[position.Key], l);
             }
 
+            display_score(game.Score);
 
         }
 
@@ -209,8 +210,6 @@ namespace Tetris
                 FormBorderStyle = FormBorderStyle.FixedSingle;
                 WindowState = FormWindowState.Normal;
             }
-
-            Invalidate();
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)

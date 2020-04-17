@@ -7,6 +7,9 @@ namespace Tetris
     {
         //contains all possible colors
         public static char[] colors = { 'g', 'y', 'r', 'l', 'b', 'p', 'o' };
+        //Contains points for amount of lines cleared 
+        public static int[] points = { 40, 100, 300, 1200 };
+        
         public static void wait(int milliseconds)
         {
             Timer timer1 = new Timer();
