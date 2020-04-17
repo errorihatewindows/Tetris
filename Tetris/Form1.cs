@@ -44,7 +44,6 @@ namespace Tetris
         //Returns last KeyStroke
         public char get_Input()
         {
-
             char tempInput = lastInput;
             //Clear last Key Input
             lastInput = '.';
