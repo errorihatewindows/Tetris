@@ -40,7 +40,7 @@ namespace Tetris
             DoubleBuffered = true;
 
             //sets global Sound Volume to 10
-            line.settings.volume = 20;
+            line.settings.volume = 50;
 ;
         }
 
@@ -67,18 +67,18 @@ namespace Tetris
                 line.settings.volume = 1;
                 gameover.URL = @"gameover.wav";
                 gameover.controls.play();
-                util.wait(2000);
-                line.settings.volume = 20;
+                util.wait(200);
+                line.settings.volume = 100;
             }
 
             
             if (Sound == "line")
             {
-                line.settings.volume = 1;
+                line.settings.volume = 50;
                 line.URL = @"line.wav";
                 line.controls.play();
-                util.wait(300);
-                line.settings.volume = 20;
+                util.wait(50);
+                line.settings.volume = 100;
             }
             if (Sound == "stop")
                 BGMusic.Stop();
@@ -92,10 +92,15 @@ namespace Tetris
             //draw BG for playing Area
             Draw_Background(l);
 
-            //paints Score
-            display_score(game.GetScore(), l);
             //Draws next Peace
             draw_nextPiece(game.GetNextPiece(), l);
+            
+            //displays Score
+            display_score(game.GetScore(), l);
+            //Lines to Clear
+            display_linestoClear(game.GetLines(), l);
+            //Draw Current Level
+            display_Level(game.GetLevel(), l);
 
             //Draws each Piece int the Board
             foreach (KeyValuePair<Piece, char> position in board)
@@ -174,7 +179,7 @@ namespace Tetris
         }
 
         //Displays Socre
-        public void display_score(int score, Graphics l)
+        private void display_score(int score, Graphics l)
         {
             string Score = Convert.ToString(score);
 
@@ -185,11 +190,49 @@ namespace Tetris
                 //Scale Down image
                 Num = new Bitmap(Num, new Size(20, 20));
                 
-                l.DrawImage(Num, (Size.Width / 2) + 180 + (23 * i), 602); 
+                l.DrawImage(Num, (Size.Width / 2) + 181 + (23 * i), 602); 
             }
         }
 
-        public void draw_nextPiece(Board board, Graphics l)
+        private void display_linestoClear(int lines, Graphics l)
+        {
+            string LinesToClear = Convert.ToString(lines);
+
+            for (int i = 0; i < LinesToClear.Length; i++)
+            {
+                //Load Image
+                Bitmap Num = new Bitmap(LinesToClear[i].ToString() + ".png");
+                //Scale Down image
+                Num = new Bitmap(Num, new Size(15, 15));
+
+                l.DrawImage(Num, (Size.Width / 2) - 215 + (15 * i), 701);
+            }
+        }
+
+        private void display_Level(int level, Graphics l)
+        {
+            string Level = Convert.ToString(level);
+            int size = 30, shift_x = 273, shift_y = 633;
+
+            if (Level.Length > 1)
+            {
+                size = 25;
+                shift_x = shift_x + 12;
+                shift_y = shift_y + 3;
+            }
+
+            for (int i = 0; i < Level.Length; i++)
+            {
+                //Load Image
+                Bitmap Num = new Bitmap(Level[i].ToString() + ".png");
+                //Scale Up image
+                Num = new Bitmap(Num, new Size(size, size));
+
+                l.DrawImage(Num, (Size.Width / 2) - shift_x + (22 * i), shift_y);
+            }
+        } 
+
+        private void draw_nextPiece(Board board, Graphics l)
         {
             if (board[Tuple.Create(0,0)] != '.')
             {

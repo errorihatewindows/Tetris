@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
-
 using Piece = System.Tuple<int, int>;
 using Board = System.Collections.Generic.Dictionary<System.Tuple<int, int>, char>;
 
@@ -14,12 +13,14 @@ namespace Tetris
     public class Game
     {
         private int tickCount = 0;
-        private const int FPS = 120;
+        private const int FPS = 30;
         private int Score;
         private Board board = new Board();
         private Timer Game_Timer = new Timer();
         private Pieces nextPiece;
         private Pieces currentPiece;
+        private int LinestoClear;
+        private int Level;
         //util function classes
         Random rand = new Random();
         Form1 drawing;
@@ -32,6 +33,8 @@ namespace Tetris
             nextPiece = new Pieces(util.colors[rand.Next(7)]);
             Generate_Board();
             Score = 0;
+            Level = 10;
+            LinestoClear = 10;
         }
         //-----------------
         //getter
@@ -63,6 +66,8 @@ namespace Tetris
         }
 
         public int GetScore() { return Score; }
+        public int GetLevel() { return Level; }
+        public int GetLines() { return LinestoClear; }
         public bool is_running() { return Game_Timer.Enabled; }
         //------------------
         //setter
@@ -204,10 +209,32 @@ namespace Tetris
             }
             if (deleted > 0) 
             {
-                Score += util.points[deleted - 1]; //(* (Level + 1))
+                Score += util.points[deleted - 1] * (Level + 1);
+                LinestoClear = LinestoClear - deleted;
+                if (LinestoClear <= 0)
+                {
+                    Level++;
+                    LinestoClear = 10;
+                }
                 Console.WriteLine("you removed {0} Lines: total Points {1}", deleted, Score);
                 drawing.playSound("line");
             }
+        }
+        private int FramesPerGrid(int Level)
+        {
+            int FramesPerGrid = 0;
+            if (Level <= 8)
+                FramesPerGrid = 48 - (5 * Level);
+            if (Level == 9)
+                FramesPerGrid = 6;
+            if (Level >= 10 && Level <= 18)
+                FramesPerGrid = 5 - (int)((Level - 10) / 3);
+            if (Level >= 19 && Level <= 28)
+                FramesPerGrid = 2;
+            if (Level >= 29)
+                FramesPerGrid = 1;
+
+            return FramesPerGrid; 
         }
         private void Game_Tick(Object myObject, EventArgs myEventArgs)
         {
@@ -240,11 +267,14 @@ namespace Tetris
             tickCount++;
             if (currentPiece == null) { drawing.Invalidate(); return; }
             //only apply natural gravity every x ticks
-            if (tickCount >= 18)
+            if (tickCount >= FramesPerGrid(Level))
             {
                 gravity();
                 tickCount = 0;
                 changed = true;
+                Console.WriteLine(Level);
+                Console.WriteLine(FramesPerGrid(Level));
+                Console.WriteLine(LinestoClear);
             }
             if (changed) { drawing.Invalidate(); }
         }
