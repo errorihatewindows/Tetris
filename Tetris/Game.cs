@@ -135,19 +135,32 @@ namespace Tetris
         //handles roation
         private void Rotate()
         {
-            //TODO add wallkicks
+            Piece[] relatives = currentPiece.wallkick_relatives();
             Piece[] old = currentPiece.Blocks();
             currentPiece.Rotate();
-            bool fail = false;
-            foreach (Piece current in currentPiece.Blocks())
+            int sucess = -1;
+            for (int i = 0; i < 5; i++)
             {
-                //out of board
-                if (!in_board(current))
+                bool fail = false;
+                foreach (Piece check in currentPiece.Blocks())
+                {
+                    Piece current= Tuple.Create(check.Item1 + relatives[i].Item1,
+                                                check.Item2 + relatives[i].Item2);
+                    //out of board
+                    if (!in_board(current))
                     { fail = true; break; }
-                //piece blocks
-                if (board[current] != '.') { fail = true; break; }
+                    //piece blocks
+                    if (board[current] != '.') { fail = true; break; }
+                }
+                //check passed, perform this kick
+                if (!fail) 
+                {
+                    sucess = i;
+                    currentPiece.updatePosition(relatives[i]);
+                    break;
+                }
             }
-            if (fail) { currentPiece.Rotate(true); }
+            if (sucess == -1) { currentPiece.Rotate(true); }
         }
         //moves piece by 1 or -1
         private void move(int direction)

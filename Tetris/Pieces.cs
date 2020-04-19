@@ -35,6 +35,11 @@ namespace Tetris
         {
             return blocks[color]();
         }
+        public void updatePosition(Piece relative)
+        {
+            position = Tuple.Create(position.Item1 + relative.Item1,
+                                    position.Item2 + relative.Item2);
+        }
         //reduce y axis setter
         public void gravity()
         {
@@ -63,15 +68,14 @@ namespace Tetris
         //returns a list of the relative positions
         public Piece[] wallkick_relatives()
         {
-            // square never kicks
-            if (color == 'y') { return new Piece[1]; }
             // I has diffrent rules than all others
             if (color == 'l') { return    Ikick(); }
             else              { return notIkick(); }
         }
-        private Piece[] Ikick()
+        private Piece[] notIkick()
         {
             Piece[] output = new Piece[5];
+            output[0] = Tuple.Create(0, 0);
             switch (rotation)
             {
                 case 0:
@@ -101,9 +105,10 @@ namespace Tetris
             }
             return output;
         }
-        private Piece[] notIkick()
+        private Piece[] Ikick()
         {
             Piece[] output = new Piece[5];
+            output[0] = Tuple.Create(0, 0);
             switch (rotation)
             {
                 case 0:
